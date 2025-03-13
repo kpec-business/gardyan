@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usługi Instalacyjne Wrocław | Michał Gardyan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Oswald:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #00A5E0; /* Teal blue */
+            --primary-dark: #0077A0;
+            --secondary-color: #131313; /* Almost black */
+            --light-color: #FFFFFF;
+            --text-color: #333333;
+            --light-gray: #f5f5f5;
+            --gray: #dddddd;
+            --shadow-color: rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background-color: var(--light-color);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h2, h3, h4, .logo, .nav-links a, .btn, .counter-value {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: rgba(19, 19, 19, 0.9);
+            padding: 1.2rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px var(--shadow-color);
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 2rem;
+            background-color: rgba(19, 19, 19, 0.95);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 95vh; /* Slightly shorter than full */
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); /* Angle at bottom */
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1.2s ease forwards;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 80%;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 1.2s ease 0.3s forwards;
+            font-weight: 300;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+        }
+
+        .about {
+            background: var(--light-color);
+            position: relative;
+            padding: 6rem 2rem;
+        }
+
+        .services {
+            background: var(--light-gray);
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .gallery {
+            background: var(--light-color);
+            padding: 6rem 2rem;
+        }
+
+        .testimonials {
+            background: var(--light-gray);
+            padding: 6rem 2rem;
+        }
+
+        .faq-section {
+            background: var(--light-color);
+            padding: 6rem 2rem;
+        }
+
+        .contact {
+            background: var(--secondary-color);
+            color: white;
+            padding: 6rem 2rem;
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%); /* Angle at top */
+            margin-top: -4rem; /* Pull up to overlap */
+            z-index: 1;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .contact {
+                clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); /* Less steep angle on mobile */
+                margin-top: -2rem;
+                padding-top: 4rem;
+            }
+        }
+
+        /* Section titles */
+        .section-title {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::before {
+            content: "";
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title.light {
+            color: var(--light-color);
+        }
+
+        .section-title.light::before {
+            background-color: var(--light-color);
+        }
+
+        /* About Section */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 6px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            height: 250px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Counter Section */
+        .counter-section {
+            background: var(--primary-color);
+            color: white;
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .counter-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--primary-color);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            z-index: -1;
+        }
+
+        .counter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .counter-item {
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .counter-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .counter-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .counter-title {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 6px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-card::before {
+            content: "\201C"; /* Unicode for opening double quotation mark */
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-top: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid var(--gray);
+            padding-top: 1rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--primary-color);
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+
+        .faq-answer.show {
+            padding: 1.2rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Contact */
+        .contact-container {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            padding: 1rem 0;
+        }
+
+        .contact-info p {
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .contact-info i {
+            margin-right: 1rem;
+            width: 24px;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Scroll Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top i {
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .counter-container {
+                gap: 1rem;
+            }
+            .counter-item:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .about-grid, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1; /* Move image above text on smaller screens */
+            }
+            
+            .counter-item {
+                min-width: 150px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--secondary-color);
+                padding: 6rem 2rem 2rem;
+                flex-direction: column;
+                text-align: left;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+                display: block;
+                margin: 1rem auto;
+                width: 80%;
+                max-width: 300px;
+            }
+            
+            .counter-section {
+                padding: 3rem 1rem;
+            }
+            
+            .counter-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .counter-item {
+                margin: 0;
+                padding: 1rem;
+            }
+            
+            .counter-value {
+                font-size: 3rem;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .about-grid, .services-grid, .gallery-grid {
+                gap: 1.5rem;
+            }
+            
+            .service-card {
+                padding: 1.5rem;
+            }
+            
+            .contact-container {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll to top button -->
+    <div class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <img src="/api/placeholder/100/50" alt="Michał Gardyan Logo">
+            </a>
+            <button class="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="#start">Start</a>
+                <a href="#about">O Nas</a>
+                <a href="#services">Usługi</a>
+                <a href="#gallery">Realizacje</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="start" class="hero">
+        <div class="hero-content">
+            <h1>Profesjonalne Usługi Instalacyjne</h1>
+            <p>Profesjonalne instalacje – pewność na lata!</p>
+            <div>
+                <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
+                <a href="#services" class="btn btn-secondary">Nasze Usługi</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="counter" class="counter-section">
+        <div class="counter-container">
+            <div class="counter-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="counter-value" data-target="8">0</div>
+                <div class="counter-title">Lat Doświadczenia</div>
+            </div>
+            <div class="counter-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="counter-value" data-target="250">0</div>
+                <div class="counter-title">Ukończonych Projektów</div>
+            </div>
+            <div class="counter-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="counter-value" data-target="100">0</div>
+                <div class="counter-title">Zadowolonych Klientów (%)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about section">
+        <div class="about-container">
+            <h2 class="section-title" data-aos="fade-up">Kim Jesteśmy</h2>
+            <div class="about-grid">
+                <div class="about-content" data-aos="fade-right">
+                    <div class="about-text">
+                        <p>
+                            Michał Gardyan Usługi Instalacyjne to firma oferująca kompleksowe usługi w zakresie instalacji hydraulicznych, grzewczych i gazowych. Z pasją i zaangażowaniem realizujemy projekty dla klientów indywidualnych oraz firm od ponad 8 lat.
+                        </p>
+                        <p>
+                            Specjalizujemy się w nowoczesnych rozwiązaniach takich jak pompy ciepła, instalacje fotowoltaiczne i rekuperacja. Nasz zespół to wykwalifikowani specjaliści z wieloletnim doświadczeniem, którzy stale podnoszą swoje kwalifikacje.
+                        </p>
+                        <ul class="features-list">
+                            <li data-aos="fade-up" data-aos-delay="100">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Fachowe doradztwo i konsultacje techniczne</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Gwarancja na wszystkie wykonane prace</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="300">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Bezpłatna wycena przed rozpoczęciem prac</span>
+                            </li>
+                            <li data-aos="fade-up" data-aos-delay="400">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Przejrzyste zasady rozliczeń i terminowość</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="/api/placeholder/600/400" alt="Zdjęcie realizacji" style="width: 100%; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services section">
+        <h2 class="section-title" data-aos="fade-up">Nasze Usługi</h2>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-icon">
+                    <i class="fas fa-fire-alt"></i>
+                </div>
+                <h3>Instalacje Gazowe</h3>
+                <p>Profesjonalny montaż instalacji gazowych, serwis urządzeń gazowych oraz przeglądy okresowe zapewniające maksymalne bezpieczeństwo.</p>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Pompy Ciepła</h3>
+                <p>Montaż i serwis energooszczędnych pomp ciepła. Projektujemy systemy dopasowane do indywidualnych potrzeb, z naciskiem na efektywność energetyczną.</p>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>Uzdatnianie Wody</h3>
+                <p>Montaż systemów uzdatniania, filtrowania i zmiękczania wody. Przeprowadzamy szczegółową analizę wody i dobieramy odpowiednie rozwiązania.</p>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-icon">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3>Rekuperacja</h3>
+                <p>Montaż i serwis systemów wentylacji mechanicznej z odzyskiem ciepła. Zapewniamy świeże powietrze i oszczędność energii w Twoim domu.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery section">
+        <h2 class="section-title" data-aos="fade-up">Nasze Realizacje</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                <img src="/api/placeholder/400/300" alt="Realizacja 1">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
+                <img src="/api/placeholder/400/300" alt="Realizacja 2">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <img src="/api/placeholder/400/300" alt="Realizacja 3">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+                <img src="/api/placeholder/400/300" alt="Realizacja 4">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                <img src="/api/placeholder/400/300" alt="Realizacja 5">
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="350">
+                <img src="/api/placeholder/400/300" alt="Realizacja 6">
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials section">
+        <h2 class="section-title" data-aos="fade-up">Co Mówią Nasi Klienci</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-text">
+                    <p>Mega fachowa pomoc. Świetny kontakt. Szybko i bardzo sprawnie. Gorąco polecamy wszystkim.</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4>Marzena Malecka</h4>
+                        <p>Klient indywidualny</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-text">
+                    <p>Polecam, dobry fachowiec, robota zrobiona szybko i solidnie.</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4>Luk</h4>
+                        <p>Klient indywidualny</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-text">
+                    <p>Pan Michał montował nam system uzdatniania wody oraz wymieniał całą instalację wodną w mieszkaniu. Praca wykonana perfekcyjnie, czysto i schludnie. Na pewno będę polecać dalej!</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4>Anna Wiśniewska</h4>
+                        <p>Klient indywidualny</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section section">
+        <h2 class="section-title" data-aos="fade-up">Najczęściej Zadawane Pytania</h2>
+        <div class="faq-container">
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-question">
+                    <span>Jakie są zalety pomp ciepła w porównaniu do tradycyjnych systemów grzewczych?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Pompy ciepła oferują znaczne oszczędności energetyczne, ponieważ wytwarzają 3-5 kW energii cieplnej z każdego 1 kW zużytej energii elektrycznej. Są one przyjazne dla środowiska, nie emitują spalin ani zanieczyszczeń w miejscu użytkowania, a ich eksploatacja jest praktycznie bezobsługowa.</p>
+                    <p>Dodatkowo, pompy ciepła mogą służyć także do chłodzenia pomieszczeń w okresie letnim, co eliminuje potrzebę instalacji oddzielnego systemu klimatyzacji. W połączeniu z instalacją fotowoltaiczną stanowią idealne rozwiązanie zapewniające niezależność energetyczną.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="faq-question">
+                    <span>Czy mogę otrzymać dofinansowanie na instalację pompy ciepła?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tak, aktualnie dostępnych jest kilka programów dofinansowań do pomp ciepła, m.in. program "Czyste Powietrze", "Moje Ciepło" oraz ulga termomodernizacyjna. Wysokość dofinansowania zależy od wielu czynników, takich jak rodzaj pompy ciepła, efektywność energetyczna budynku oraz dochody gospodarstwa domowego.</p>
+                    <p>Nasza firma oferuje kompleksowe wsparcie w procesie uzyskania dofinansowania - pomagamy w przygotowaniu niezbędnej dokumentacji, wypełnieniu wniosków oraz doborze optymalnego rozwiązania kwalifikującego się do danego programu. Zapraszamy do kontaktu w celu uzyskania szczegółowych informacji.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="faq-question">
+                    <span>Jakie usługi obejmuje serwis instalacji wykonanych przez firmę Michał Gardyan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Nasz serwis instalacji obejmuje kompleksową opiekę nad wykonanymi przez nas systemami. Oferujemy regularne przeglądy techniczne, konserwację urządzeń, czyszczenie i odkażanie systemów, regulację parametrów pracy oraz naprawy w przypadku awarii.</p>
+                    <p>Dla instalacji grzewczych wykonujemy okresowe płukanie wymienników ciepła, sprawdzanie szczelności połączeń oraz kontrolę ciśnienia w układzie. Dla pomp ciepła przeprowadzamy kontrolę czynnika chłodniczego, czyszczenie filtrów i wymienników oraz weryfikację parametrów pracy systemu. Dodatkowo zapewniamy całodobowe wsparcie techniczne i szybką reakcję w przypadku awarii.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact section">
+        <h2 class="section-title light" data-aos="fade-up">Skontaktuj Się z Nami</h2>
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <p><i class="fas fa-phone"></i> +48 793 930 685</p>
+                <p><i class="fas fa-envelope"></i> info@instalacjegardyan.pl</p>
+                <p><i class="fas fa-map-marker-alt"></i> Sołtysowicka 23</p>
+                <p><i class="fas fa-clock"></i> Godziny pracy: Pon-Pt: 8:00-18:00, Sob: 9:00-14:00</p>
+            </div>
+            <div class="map-container" data-aos="fade-left">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2503.171707295992!2d17.06839717592659!3d51.14218463731866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470fe9ac1afee4fb%3A0x53b5456370cbaff6!2sSo%C5%82tysowicka%2023%2C%2051-168%20Wroc%C5%82aw!5e0!3m2!1spl!2spl!4v1741893543930!5m2!1spl!2spl" width="100%" height="450" style="border:0; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Michał Gardyan</h4>
+                <p>Profesjonalne usługi instalacyjne dla domu i firmy. Oferujemy kompleksowe rozwiązania w zakresie instalacji hydraulicznych, grzewczych i gazowych.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Usługi</h4>
+                <p>Instalacje CO</p>
+                <p>Instalacje Wod-Kan</p>
+                <p>Instalacje Gazowe</p>
+                <p>Pompy Ciepła</p>
+                <p>Uzdatnianie Wody</p>
+                <p>Rekuperacja</p>
+            </div>
+            <div class="footer-section">
+                <h4>Kontakt</h4>
+                <p><i class="fas fa-phone"></i> +48 793 930 685</p>
+                <p><i class="fas fa-envelope"></i> info@instalacjegardyan.pl</p>
+                <p><i class="fas fa-map-marker-alt"></i> Sołtysowicka 23</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Michał Gardyan Usługi Instalacyjne | Strona wykonana przez kpstrony.pl
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS (Animate on Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease',
+                once: true,
+                offset: 100
+            });
+
+            // Navigation scroll effect
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                const scrollTop = window.scrollY;
+                
+                if (scrollTop > 100) {
+                    nav.classList.add('scrolled');
+                    document.querySelector('.scroll-top').classList.add('active');
+                } else {
+                    nav.classList.remove('scrolled');
+                    document.querySelector('.scroll-top').classList.remove('active');
+                }
+            });
+            
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Scroll to top button
+            document.querySelector('.scroll-top').addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Counter animation
+            const counterSection = document.querySelector('.counter-section');
+            if (counterSection) {
+                const counters = document.querySelectorAll('.counter-value');
+                let counterStarted = false;
+                
+                function startCounter() {
+                    if (isInViewport(counterSection) && !counterStarted) {
+                        counterStarted = true;
+                        counters.forEach(counter => {
+                            const target = parseInt(counter.getAttribute('data-target'));
+                            const duration = 2000; // 2 seconds
+                            const step = target / (duration / 16); // 60fps
+                            
+                            let current = 0;
+                            const counterTimer = setInterval(() => {
+                                current += step;
+                                counter.textContent = Math.round(current);
+                                
+                                if (current >= target) {
+                                    counter.textContent = target;
+                                    clearInterval(counterTimer);
+                                }
+                            }, 16);
+                        });
+                    }
+                }
+                
+                // Check if counter section is in viewport on scroll
+                window.addEventListener('scroll', startCounter);
+                // Also check on page load
+                startCounter();
+            }
+            
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('show');
+                });
+            });
+            
+            // Helper function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                    rect.bottom >= 0
+                );
+            }
+        });
+    </script>
+</body>
+</html>
