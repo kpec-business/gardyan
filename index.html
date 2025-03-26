@@ -994,18 +994,23 @@ position: relative;
     }
 
     @media (min-width: 992px) {
-    .preview-container {
+        .preview-container {
         max-height: 500px;
         overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     
     .preview-image {
         width: 100%;
         height: 500px;
         object-fit: cover;
+        object-position: center;
         display: block;
         transition: transform 0.5s ease;
     }
+}
 }
         
     @media (max-width: 768px) {
@@ -1562,6 +1567,29 @@ position: relative;
             closeGallery();
         }
     });
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const previewImage = document.querySelector('.preview-image');
+    const previewContainer = document.querySelector('.preview-container');
+    
+    if (previewImage && previewContainer) {
+        previewImage.onload = function() {
+            // Check if image is portrait (height > width)
+            if (this.naturalHeight > this.naturalWidth) {
+                previewContainer.classList.add('portrait-image');
+            } else {
+                previewContainer.classList.remove('portrait-image');
+            }
+        };
+        
+        // Trigger for already loaded images
+        if (previewImage.complete) {
+            if (previewImage.naturalHeight > previewImage.naturalWidth) {
+                previewContainer.classList.add('portrait-image');
+            }
+        }
+    }
+});
     </script>
 </body>
 </html>
