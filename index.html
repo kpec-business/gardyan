@@ -845,6 +845,171 @@
                 gap: 2rem;
             }
         }
+
+        .gallery-preview {
+        max-width: 900px;
+        margin: 0 auto 2rem;
+    }
+
+    .preview-container {
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .preview-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .preview-container:hover .preview-image {
+        transform: scale(1.03);
+    }
+
+    .preview-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        padding: 2rem;
+        text-align: center;
+        transition: opacity 0.3s ease;
+    }
+
+    .view-gallery-btn {
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.9rem 2.2rem;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .view-gallery-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+    }
+    
+    /* Gallery Modal */
+    .gallery-modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.95);
+        overflow: hidden;
+    }
+
+    .gallery-modal-content {
+        position: relative;
+        width: 80%;
+        max-width: 1200px;
+        height: 80vh;
+        margin: 2% auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gallery-modal-content img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    }
+
+    .gallery-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+        transition: color 0.3s ease;
+    }
+
+    .gallery-close:hover {
+        color: var(--primary-color);
+    }
+
+    .gallery-prev, .gallery-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-prev {
+        left: 10px;
+    }
+    
+    .gallery-next {
+        right: 10px;
+    }
+
+    .gallery-prev:hover, .gallery-next:hover {
+        background-color: var(--primary-dark);
+    }
+
+    #image-counter {
+        position: absolute;
+        bottom: -40px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background-color: var(--primary-color);
+        padding: 5px 15px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+        .gallery-modal-content {
+            width: 95%;
+            height: 70vh;
+        }
+        
+        .gallery-prev, .gallery-next {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .view-gallery-btn {
+            padding: 0.8rem 1.8rem;
+            font-size: 0.9rem;
+        }
+    }
     </style>
 </head>
 <body>
@@ -985,29 +1150,33 @@
         </div>
     </section>
 
-    <section id="gallery" class="gallery section">
-        <h2 class="section-title" data-aos="fade-up">Nasze Realizacje</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
-                <img src="realizacja1.jpg" alt="Realizacja 1">
-            </div>
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="150">
-                <img src="realizacja2.jpg" alt="Realizacja 2">
-            </div>
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
-                <img src="/api/placeholder/400/300" alt="Realizacja 3">
-            </div>
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
-                <img src="/api/placeholder/400/300" alt="Realizacja 4">
-            </div>
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
-                <img src="/api/placeholder/400/300" alt="Realizacja 5">
-            </div>
-            <div class="gallery-item" data-aos="fade-up" data-aos-delay="350">
-                <img src="/api/placeholder/400/300" alt="Realizacja 6">
+   <section id="gallery" class="gallery section">
+    <h2 class="section-title" data-aos="fade-up">Nasze Realizacje</h2>
+    
+    <!-- Gallery Preview -->
+    <div class="gallery-preview" data-aos="fade-up">
+        <div class="preview-container">
+            <img src="realizacja5.jpg" alt="Realizacja instalacyjna" class="preview-image">
+            <div class="preview-overlay">
+                <button class="view-gallery-btn" onclick="openGallery()">
+                    <i class="fas fa-images"></i> Zobacz wszystkie zdjęcia
+                </button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Full Gallery Modal -->
+    <div id="gallery-modal" class="gallery-modal">
+        <span class="gallery-close" onclick="closeGallery()">&times;</span>
+        
+        <div class="gallery-modal-content">
+            <img id="current-image" src="" alt="Zdjęcie realizacji">
+            <span id="image-counter">1 / 16</span>
+            <a class="gallery-prev" onclick="changeImage(-1)">&#10094;</a>
+            <a class="gallery-next" onclick="changeImage(1)">&#10095;</a>
+        </div>
+    </div>
+</section>
 
     <section id="testimonials" class="testimonials section">
         <h2 class="section-title" data-aos="fade-up">Co Mówią Nasi Klienci</h2>
@@ -1254,6 +1423,130 @@
                 );
             }
         });
+
+          let galleryImages = [
+        {src: "realizacja1.jpg"},
+        {src: "realizacja2.jpg"},
+        {src: "realizacja3.jpg"},
+        {src: "realizacja4.jpg"},
+        {src: "realizacja5.jpg"},
+        {src: "realizacja6.jpg"},
+        {src: "realizacja7.jpg"},
+        {src: "realizacja8.jpg"},
+        {src: "realizacja9.jpg"},
+        {src: "realizacja10.jpg"},
+        {src: "realizacja11.jpg"},
+        {src: "realizacja12.jpg"},
+        {src: "realizacja13.jpg"},
+        {src: "realizacja14.jpg"},
+        {src: "realizacja15.jpg"},
+        {src: "realizacja16.jpg"}
+    ];
+
+    let currentImageIndex = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function openGallery() {
+        const galleryModal = document.getElementById('gallery-modal');
+        galleryModal.style.display = 'block';
+        showImage(0);
+        
+        // Disable scrolling on the body
+        document.body.style.overflow = 'hidden';
+        
+        // Add keyboard navigation
+        document.addEventListener('keydown', handleGalleryKeyPress);
+        
+        // Add touch events for mobile swipe
+        const modalContent = document.querySelector('.gallery-modal-content');
+        modalContent.addEventListener('touchstart', handleTouchStart, false);
+        modalContent.addEventListener('touchend', handleTouchEnd, false);
+    }
+
+    function closeGallery() {
+        document.getElementById('gallery-modal').style.display = 'none';
+        
+        // Re-enable scrolling
+        document.body.style.overflow = '';
+        
+        // Remove keyboard listener
+        document.removeEventListener('keydown', handleGalleryKeyPress);
+        
+        // Remove touch event listeners
+        const modalContent = document.querySelector('.gallery-modal-content');
+        modalContent.removeEventListener('touchstart', handleTouchStart);
+        modalContent.removeEventListener('touchend', handleTouchEnd);
+    }
+
+    function changeImage(direction) {
+        currentImageIndex += direction;
+        
+        // Handle looping
+        if (currentImageIndex >= galleryImages.length) {
+            currentImageIndex = 0;
+        } else if (currentImageIndex < 0) {
+            currentImageIndex = galleryImages.length - 1;
+        }
+        
+        showImage(currentImageIndex);
+    }
+
+    function showImage(index) {
+        const image = galleryImages[index];
+        const currentImg = document.getElementById('current-image');
+        
+        // Preload image to avoid flickering
+        const imgPreload = new Image();
+        imgPreload.onload = function() {
+            // Set image source only after it's loaded
+            currentImg.src = image.src;
+            document.getElementById('image-counter').textContent = `${index + 1} / ${galleryImages.length}`;
+        };
+        imgPreload.src = image.src;
+    }
+
+    function handleGalleryKeyPress(e) {
+        if (e.key === 'Escape') {
+            closeGallery();
+        } else if (e.key === 'ArrowLeft') {
+            changeImage(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeImage(1);
+        }
+    }
+
+    // Handle mobile touch events for swiping
+    function handleTouchStart(event) {
+        touchStartX = event.changedTouches[0].screenX;
+    }
+
+    function handleTouchEnd(event) {
+        touchEndX = event.changedTouches[0].screenX;
+        handleSwipe();
+    }
+
+    function handleSwipe() {
+        // Calculate swipe distance
+        const swipeDistance = touchEndX - touchStartX;
+        const minSwipeDistance = 50; // Minimum distance to count as a swipe
+        
+        if (swipeDistance > minSwipeDistance) {
+            // Swipe right to left (previous image)
+            changeImage(-1);
+        } else if (swipeDistance < -minSwipeDistance) {
+            // Swipe left to right (next image)
+            changeImage(1);
+        }
+    }
+
+    // Close the gallery when clicking outside the image
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('gallery-modal');
+        if (event.target === modal) {
+            closeGallery();
+        }
+    });
     </script>
 </body>
 </html>
